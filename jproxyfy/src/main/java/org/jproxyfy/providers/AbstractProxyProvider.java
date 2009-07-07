@@ -1,7 +1,9 @@
-package org.jproxyfy;
+package org.jproxyfy.providers;
 
 import java.util.List;
 
+import org.jproxyfy.ProxyProvider;
+import org.jproxyfy.Request;
 import org.jproxyfy.ipinfo.IpInfo;
 import org.jproxyfy.tree.RequestTree;
 
