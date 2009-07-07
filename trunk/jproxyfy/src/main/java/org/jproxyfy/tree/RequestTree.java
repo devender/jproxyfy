@@ -30,6 +30,11 @@ import org.jproxyfy.enums.CountryCode;
 import org.jproxyfy.enums.RequestStatus;
 import org.jproxyfy.ipinfo.IpInfo;
 
+/**
+ * 
+ * @author devender
+ * 
+ */
 public class RequestTree {
 	private Map<CountryCode, List<Request>> requestByCountry;
 	private Map<UUID, Request> requestByUUID;
@@ -67,15 +72,23 @@ public class RequestTree {
 		list.addAll(requestByCountry.get(ipInfo.getCountryCode()));
 		return list;
 	}
-	
+
 	public RequestStatus getRequestStatus(UUID uuid) {
 		return requestByUUID.get(uuid).getRequestStatus();
 	}
-	
-	public Request remove(UUID uuid)
-	{
+
+	public Request remove(UUID uuid) {
 		Request request = requestByUUID.get(uuid);
 		requestByUUID.remove(uuid);
 		return request;
+	}
+
+	public boolean hasMoreRequestsToBeFullfilled() {
+		for (Request request : requestByUUID.values()) {
+			if (RequestStatus.NOT_YET_PROCESSED.compareTo(request.getRequestStatus()) == 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
