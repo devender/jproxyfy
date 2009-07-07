@@ -28,9 +28,28 @@ import org.jproxyfy.tree.RequestTree;
 public class ProxyfyImpl implements Proxyfy {
 	private List<ProxyProvider> list;
 	private RequestTree requestTree;
+	private static final long TEN_MIN = 600000;
 
 	public ProxyfyImpl() {
 		requestTree = new RequestTree();
+	}
+
+	public void run() {
+		while (requestTree.hasMoreRequestsToBeFullfilled()) {
+			for (ProxyProvider provider : list) {
+				provider.fullfillRequests(requestTree);
+			}
+		}
+		sleep();
+	}
+
+	@SuppressWarnings("static-access")
+	private void sleep() {
+		try {
+			Thread.currentThread().sleep(TEN_MIN);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
