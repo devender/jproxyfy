@@ -19,6 +19,7 @@ package org.jproxyfy.ipinfo;
 
 import java.io.IOException;
 
+import org.jproxyfy.enums.CountryCode;
 import org.jproxyfy.ipinfo.impl.IpInfoProviderImpl;
 
 import junit.framework.TestCase;
@@ -32,8 +33,7 @@ public class IpInfoDBImpl extends TestCase {
 
 		assertEquals("74.125.45.100", actual.getIp());
 		assertEquals("OK", actual.getStatus());
-		assertEquals("US", actual.getCountryCode());
-		assertEquals("United States", actual.getCountryName());
+		assertEquals(CountryCode.US, actual.getCountryCode());
 		assertEquals("06", actual.getReagionCode());
 		assertEquals("California", actual.getRegionName());
 		assertEquals("Mountain View", actual.getCity());

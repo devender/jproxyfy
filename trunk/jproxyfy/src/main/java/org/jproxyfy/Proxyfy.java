@@ -21,8 +21,7 @@ import java.net.URL;
 import java.util.UUID;
 
 import org.jproxyfy.enums.CountryCode;
-
-
+import org.jproxyfy.enums.RequestStatus;
 
 /**
  * 
@@ -30,22 +29,40 @@ import org.jproxyfy.enums.CountryCode;
  * 
  */
 public interface Proxyfy {
-	
+
 	/**
 	 * Add a request to hit a particular url from a random IP
+	 * 
 	 * @param url
 	 * @return {@link UUID}
 	 */
 	UUID addRequest(URL url);
-	
+
 	/**
-	 * Add a request to hit a particular url from the given country code, will retry for 24 hours.
+	 * Add a request to hit a particular url from the given country code, will
+	 * retry for 24 hours.
 	 * 
 	 * @param url
 	 * @param city
 	 * @return {@link UUID}
 	 */
 	UUID addRequest(URL url, CountryCode countryCode);
-		
+
+	/**
+	 * Returns the status of a given request uuid
+	 * 
+	 * @param uuid
+	 * @return {@link RequestStatus}
+	 */
+	RequestStatus getRequestStatus(UUID uuid);
+
+	/**
+	 * Returns the body of the URL for a given request, this method cannot be
+	 * called more than once for a given UUID
+	 * 
+	 * @param uuid
+	 * @return
+	 */
+	Request getResult(UUID uuid);
 
 }
