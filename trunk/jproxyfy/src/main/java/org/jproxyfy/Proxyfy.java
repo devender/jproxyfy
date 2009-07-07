@@ -18,6 +18,7 @@
 package org.jproxyfy;
 
 import java.net.URL;
+import java.util.List;
 import java.util.UUID;
 
 import org.jproxyfy.enums.CountryCode;
@@ -64,5 +65,11 @@ public interface Proxyfy {
 	 * @return
 	 */
 	Request getResult(UUID uuid);
+
+	/**
+	 * Inject a list of proxy providers used to full fill requests
+	 * @param list
+	 */
+	void setProxyProviders(List<ProxyProvider> list);
 
 }

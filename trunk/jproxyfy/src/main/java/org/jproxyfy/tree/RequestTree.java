@@ -27,6 +27,7 @@ import java.util.UUID;
 
 import org.jproxyfy.Request;
 import org.jproxyfy.enums.CountryCode;
+import org.jproxyfy.enums.RequestStatus;
 import org.jproxyfy.ipinfo.IpInfo;
 
 public class RequestTree {
@@ -67,8 +68,14 @@ public class RequestTree {
 		return list;
 	}
 	
-	public void remove(Request request)
+	public RequestStatus getRequestStatus(UUID uuid) {
+		return requestByUUID.get(uuid).getRequestStatus();
+	}
+	
+	public Request remove(UUID uuid)
 	{
-		
+		Request request = requestByUUID.get(uuid);
+		requestByUUID.remove(uuid);
+		return request;
 	}
 }
