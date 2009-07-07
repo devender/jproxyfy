@@ -15,37 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.jproxyfy;
+package org.jproxyfy.enums;
 
-import java.net.URL;
-import java.util.UUID;
-
-import org.jproxyfy.enums.CountryCode;
-
-
-
-/**
- * 
- * @author devender
- * 
- */
-public interface Proxyfy {
-	
-	/**
-	 * Add a request to hit a particular url from a random IP
-	 * @param url
-	 * @return {@link UUID}
-	 */
-	UUID addRequest(URL url);
-	
-	/**
-	 * Add a request to hit a particular url from the given country code, will retry for 24 hours.
-	 * 
-	 * @param url
-	 * @param city
-	 * @return {@link UUID}
-	 */
-	UUID addRequest(URL url, CountryCode countryCode);
-		
-
+public enum RequestStatus {
+	NOT_YET_PROCESSED, DONE, TIMED_OUT;
 }
