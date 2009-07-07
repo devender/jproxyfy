@@ -17,6 +17,8 @@
  */
 package org.jproxyfy.ipinfo;
 
+import org.jproxyfy.enums.CountryCode;
+
 /**
  * A simple pojo that holds all the data regarding an IP address.
  * 
@@ -26,8 +28,7 @@ public class IpInfo {
 	private final String ip;
 	private final int port;
 	private String status;
-	private String countryCode;
-	private String countryName;
+	private CountryCode countryCode;
 	private String reagionCode;
 	private String regionName;
 	private String city;
@@ -62,40 +63,12 @@ public class IpInfo {
 		this.status = status;
 	}
 
-	/**
-	 * Get the Country Code of this IP address
-	 * 
-	 * @return String
-	 */
-	public String getCountryCode() {
+	public CountryCode getCountryCode() {
 		return countryCode;
 	}
 
-	/**
-	 * Set the country code for this IP
-	 * 
-	 * @param countryCode
-	 */
-	public void setCountryCode(String countryCode) {
+	public void setCountryCode(CountryCode countryCode) {
 		this.countryCode = countryCode;
-	}
-
-	/**
-	 * Get the Country Name for this IP
-	 * 
-	 * @return String
-	 */
-	public String getCountryName() {
-		return countryName;
-	}
-
-	/**
-	 * Set the country name for this IP
-	 * 
-	 * @param countryName
-	 */
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
 	}
 
 	/**

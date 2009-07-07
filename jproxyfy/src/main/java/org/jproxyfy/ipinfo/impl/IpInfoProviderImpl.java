@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
+import org.jproxyfy.enums.CountryCode;
 import org.jproxyfy.ipinfo.IpInfo;
 import org.jproxyfy.ipinfo.IpInfoProvider;
 
@@ -68,8 +69,10 @@ public class IpInfoProviderImpl implements IpInfoProvider {
 			IpInfo info = new IpInfo(ip, 80);
 			if (string.contains("<Response>")) {
 				info.setStatus(getTagValue(string, "<Status>", "</Status>"));
-				info.setCountryCode(getTagValue(string, "<CountryCode>", "</CountryCode>"));
-				info.setCountryName(getTagValue(string, "<CountryName>", "</CountryName>"));
+				String cc = getTagValue(string, "<CountryCode>", "</CountryCode>");				
+				CountryCode countryCode = CountryCode.valueForCode(cc);
+				logger.info("Got ip for country "+cc+" our code is "+countryCode.name());
+				info.setCountryCode(countryCode);
 				info.setReagionCode(getTagValue(string, "<RegionCode>", "</RegionCode>"));
 				info.setRegionName(getTagValue(string, "<RegionName>", "</RegionName>"));
 				info.setCity(getTagValue(string, "<City>", "</City>"));

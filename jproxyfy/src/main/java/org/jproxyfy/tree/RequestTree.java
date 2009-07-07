@@ -27,17 +27,16 @@ import java.util.UUID;
 
 import org.jproxyfy.Request;
 import org.jproxyfy.enums.CountryCode;
+import org.jproxyfy.ipinfo.IpInfo;
 
 public class RequestTree {
 	private Map<CountryCode, List<Request>> requestByCountry;
 	private Map<UUID, Request> requestByUUID;
-	private Map<CountryCode, Map<String, List<Request>>> requestByRegion;
 
 	public RequestTree() {
 		requestByCountry = new TreeMap<CountryCode, List<Request>>();
 		requestByUUID = new HashMap<UUID, Request>();
 		requestByCountry.put(CountryCode.RANDOM, new LinkedList<Request>());
-		requestByRegion = new HashMap<CountryCode, Map<String, List<Request>>>();
 	}
 
 	public UUID addRequest(URL url) {
@@ -59,5 +58,17 @@ public class RequestTree {
 		if (!requestByCountry.containsKey(countryCode)) {
 			requestByCountry.put(countryCode, new LinkedList<Request>());
 		}
+	}
+
+	public List<Request> getRequestThatCanBeFullfilledByIP(IpInfo ipInfo) {
+		List<Request> list = new LinkedList<Request>();
+		list.addAll(requestByCountry.get(CountryCode.RANDOM));
+		list.addAll(requestByCountry.get(ipInfo.getCountryCode()));
+		return list;
+	}
+	
+	public void remove(Request request)
+	{
+		
 	}
 }
